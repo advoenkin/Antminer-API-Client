@@ -17,8 +17,7 @@ func NewDevice() *Device {
 	}
 }
 
-// Blink Метод для включения и отключения светодиодов.
-// Принимает true/false в качестве string.
+// Blink включить или выключить моргание светодиодов
 func (c *Device) Blink(state string) (Blink, error) {
 	blink, _ := json.Marshal(Blink{Blink: state})
 	c.Ip.Path = CgiPath + BlinkUrl
@@ -44,7 +43,7 @@ func (c *Device) Blink(state string) (Blink, error) {
 	return BlinkResponse, err
 }
 
-// GetBlinkStatus законченый метод получения информации о моргании светодиодов.
+// GetBlinkStatus получить статус моргания светодиодов
 func (c *Device) GetBlinkStatus() (Blink, error) {
 	c.Ip.Path = CgiPath + BlinkStatusUrl
 	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
@@ -60,7 +59,7 @@ func (c *Device) GetBlinkStatus() (Blink, error) {
 	return GetBlinkResp, err
 }
 
-// Reboot выполнить перезагрузку майнера
+// Reboot выполнить перезагрузку
 func (c *Device) Reboot() (string, error) {
 	c.Ip.Path = CgiPath + RebootUrl
 	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
@@ -75,6 +74,7 @@ func (c *Device) Reboot() (string, error) {
 	return "", err
 }
 
+// GetStats получить статистику
 func (c *Device) GetStats() (Stats, error) {
 	c.Ip.Path = CgiPath + StatsUrl
 	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
@@ -105,6 +105,7 @@ func (c *Device) GetSummary() (Summary, error) {
 	return ResponseSummary, err
 }
 
+// GetMinerConf получить информацию о конфигурации
 func (c *Device) GetMinerConf() (MinerConf, error) {
 	c.Ip.Path = CgiPath + MinerConfUrl
 	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), c.Payload)
@@ -120,6 +121,7 @@ func (c *Device) GetMinerConf() (MinerConf, error) {
 	return ResponseMinerConf, err
 }
 
+// GetSystemInfo получить системную информацию
 func (c *Device) GetSystemInfo() (SystemInfo, error) {
 	c.Ip.Path = CgiPath + SystemInfoUrl
 	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
@@ -135,6 +137,7 @@ func (c *Device) GetSystemInfo() (SystemInfo, error) {
 	return ResponseSystemInfo, err
 }
 
+// GetNetworkInfo получить информацию о сетевых настройках
 func (c *Device) GetNetworkInfo() (NetworkInfo, error) {
 	c.Ip.Path = CgiPath + NetworkInfoUrl
 	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
@@ -150,6 +153,7 @@ func (c *Device) GetNetworkInfo() (NetworkInfo, error) {
 	return ResponseNetworkInfo, err
 }
 
+// GetChart получить информацию о чартах
 func (c *Device) GetChart() (Chart, error) {
 	c.Ip.Path = CgiPath + ChartUrl
 	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
@@ -165,6 +169,7 @@ func (c *Device) GetChart() (Chart, error) {
 	return ResponseChart, err
 }
 
+// GetPools получить информацию о прописанных пулах
 func (c *Device) GetPools() (Pools, error) {
 	c.Ip.Path = CgiPath + PoolsUrl
 	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")

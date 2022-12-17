@@ -22,9 +22,9 @@ const (
 
 type Device struct {
 	Ip      url.URL `json:"ip"`
-	User    string  `json:"user"`
-	Pass    string  `json:"pass"`
-	Payload string  `json:"payload"`
+	User    string  `json:"user,omitempty"`
+	Pass    string  `json:"pass,omitempty"`
+	Payload string  `json:"payload,omitempty"`
 }
 
 type Stats struct {

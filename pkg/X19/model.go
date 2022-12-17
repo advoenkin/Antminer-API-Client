@@ -236,11 +236,6 @@ type Blink struct {
 	}
 }
 
-type RebootResponse struct {
-	Message string `json:"message"`
-	Error   error  `json:"error"`
-}
-
 type Logs struct {
 	HistoryLog string `json:"hlog"`
 	CurrentLog string `json:"log"`

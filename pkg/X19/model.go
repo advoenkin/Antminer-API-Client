@@ -21,7 +21,7 @@ const (
 )
 
 type Device struct {
-	Ip      url.URL `json:"ip"`
+	Target  url.URL `json:"target"`
 	User    string  `json:"user,omitempty"`
 	Pass    string  `json:"pass,omitempty"`
 	Payload string  `json:"payload,omitempty"`

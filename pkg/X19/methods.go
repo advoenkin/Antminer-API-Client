@@ -10,7 +10,10 @@ import (
 
 func NewDevice() *Device {
 	return &Device{
-		Ip:      url.URL{Scheme: "http", Host: "127.0.0.1", Path: "/cgi-bin/"},
+		Target: url.URL{
+			Scheme: "http",
+			Host:   "127.0.0.1",
+			Path:   "/cgi-bin/"},
 		User:    "root",
 		Pass:    "root",
 		Payload: "",
@@ -20,8 +23,8 @@ func NewDevice() *Device {
 // Blink включить или выключить моргание светодиодов
 func (c *Device) Blink(state string) (Blink, error) {
 	blink, _ := json.Marshal(Blink{Blink: state})
-	c.Ip.Path = CgiPath + BlinkUrl
-	dr := dac.NewRequest(c.User, c.Pass, "POST", c.Ip.String(), string(blink))
+	c.Target.Path = CgiPath + BlinkUrl
+	dr := dac.NewRequest(c.User, c.Pass, "POST", c.Target.String(), string(blink))
 	response, err := dr.Execute()
 	BlinkResponse := Blink{}
 	if err != nil {
@@ -45,8 +48,8 @@ func (c *Device) Blink(state string) (Blink, error) {
 
 // GetBlinkStatus получить статус моргания светодиодов
 func (c *Device) GetBlinkStatus() (Blink, error) {
-	c.Ip.Path = CgiPath + BlinkStatusUrl
-	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
+	c.Target.Path = CgiPath + BlinkStatusUrl
+	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), "")
 	response, err := dr.Execute()
 	GetBlinkResp := Blink{}
 	if err != nil {
@@ -61,8 +64,8 @@ func (c *Device) GetBlinkStatus() (Blink, error) {
 
 // Reboot выполнить перезагрузку
 func (c *Device) Reboot() (string, error) {
-	c.Ip.Path = CgiPath + RebootUrl
-	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
+	c.Target.Path = CgiPath + RebootUrl
+	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), "")
 	response, err := dr.Execute()
 	if err != nil {
 		return "", err
@@ -76,8 +79,8 @@ func (c *Device) Reboot() (string, error) {
 
 // GetStats получить статистику
 func (c *Device) GetStats() (Stats, error) {
-	c.Ip.Path = CgiPath + StatsUrl
-	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
+	c.Target.Path = CgiPath + StatsUrl
+	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), "")
 	response, err := dr.Execute()
 	ResponseStats := Stats{}
 	if err != nil {
@@ -91,8 +94,8 @@ func (c *Device) GetStats() (Stats, error) {
 }
 
 func (c *Device) GetSummary() (Summary, error) {
-	c.Ip.Path = CgiPath + SummaryUrl
-	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
+	c.Target.Path = CgiPath + SummaryUrl
+	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), "")
 	response, err := dr.Execute()
 	ResponseSummary := Summary{}
 	if err != nil {
@@ -107,8 +110,8 @@ func (c *Device) GetSummary() (Summary, error) {
 
 // GetMinerConf получить информацию о конфигурации
 func (c *Device) GetMinerConf() (MinerConf, error) {
-	c.Ip.Path = CgiPath + MinerConfUrl
-	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), c.Payload)
+	c.Target.Path = CgiPath + MinerConfUrl
+	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), c.Payload)
 	response, err := dr.Execute()
 	ResponseMinerConf := MinerConf{}
 	if err != nil {
@@ -123,8 +126,8 @@ func (c *Device) GetMinerConf() (MinerConf, error) {
 
 // GetSystemInfo получить системную информацию
 func (c *Device) GetSystemInfo() (SystemInfo, error) {
-	c.Ip.Path = CgiPath + SystemInfoUrl
-	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
+	c.Target.Path = CgiPath + SystemInfoUrl
+	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), "")
 	response, err := dr.Execute()
 	ResponseSystemInfo := SystemInfo{}
 	if err != nil {
@@ -139,8 +142,8 @@ func (c *Device) GetSystemInfo() (SystemInfo, error) {
 
 // GetNetworkInfo получить информацию о сетевых настройках
 func (c *Device) GetNetworkInfo() (NetworkInfo, error) {
-	c.Ip.Path = CgiPath + NetworkInfoUrl
-	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
+	c.Target.Path = CgiPath + NetworkInfoUrl
+	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), "")
 	response, err := dr.Execute()
 	ResponseNetworkInfo := NetworkInfo{}
 	if err != nil {
@@ -155,8 +158,8 @@ func (c *Device) GetNetworkInfo() (NetworkInfo, error) {
 
 // GetChart получить информацию о чартах
 func (c *Device) GetChart() (Chart, error) {
-	c.Ip.Path = CgiPath + ChartUrl
-	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
+	c.Target.Path = CgiPath + ChartUrl
+	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), "")
 	response, err := dr.Execute()
 	ResponseChart := Chart{}
 	if err != nil {
@@ -171,8 +174,8 @@ func (c *Device) GetChart() (Chart, error) {
 
 // GetPools получить информацию о прописанных пулах
 func (c *Device) GetPools() (Pools, error) {
-	c.Ip.Path = CgiPath + PoolsUrl
-	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
+	c.Target.Path = CgiPath + PoolsUrl
+	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), "")
 	response, err := dr.Execute()
 	ResponsePools := Pools{}
 	if err != nil {
@@ -187,8 +190,8 @@ func (c *Device) GetPools() (Pools, error) {
 
 // GetHistoryLog получить текущий лог
 func (c *Device) GetHistoryLog() (string, error) {
-	c.Ip.Path = CgiPath + HlogUrl
-	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
+	c.Target.Path = CgiPath + HlogUrl
+	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), "")
 	response, err := dr.Execute()
 	ResponseHistoryLog := Logs{}.HistoryLog
 	if err != nil {
@@ -203,8 +206,8 @@ func (c *Device) GetHistoryLog() (string, error) {
 
 // GetCurrentLog получить исторический лог
 func (c *Device) GetCurrentLog() (string, error) {
-	c.Ip.Path = CgiPath + HlogUrl
-	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Ip.String(), "")
+	c.Target.Path = CgiPath + HlogUrl
+	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), "")
 	response, err := dr.Execute()
 	ResponseLog := Logs{}.CurrentLog
 	if err != nil {
@@ -220,8 +223,8 @@ func (c *Device) GetCurrentLog() (string, error) {
 // ChangeFanSetting Метод для изменения оборотов вентилятора.
 func (c *Device) ChangeFanSetting(forceMode string, fanPwm string) (SetMinerConfResponse, error) {
 	NewConfig, _ := json.Marshal(SetMinerConf{BitmainFanCtrl: forceMode, BitmainFanPwm: fanPwm})
-	c.Ip.Path = CgiPath + SetMinerConfUrl
-	dr := dac.NewRequest(c.User, c.Pass, "POST", c.Ip.String(), string(NewConfig))
+	c.Target.Path = CgiPath + SetMinerConfUrl
+	dr := dac.NewRequest(c.User, c.Pass, "POST", c.Target.String(), string(NewConfig))
 	response, err := dr.Execute()
 	Response := SetMinerConfResponse{}
 	if err != nil {
@@ -238,8 +241,8 @@ func (c *Device) ChangeFanSetting(forceMode string, fanPwm string) (SetMinerConf
 // mode: Принимает значения true/false в качестве string
 func (c *Device) SetWorkMode(mode string) (SetMinerConfResponse, error) {
 	NewConfig, _ := json.Marshal(SetMinerConf{MinerMode: mode})
-	c.Ip.Path = CgiPath + SetMinerConfUrl
-	dr := dac.NewRequest(c.User, c.Pass, "POST", c.Ip.String(), string(NewConfig))
+	c.Target.Path = CgiPath + SetMinerConfUrl
+	dr := dac.NewRequest(c.User, c.Pass, "POST", c.Target.String(), string(NewConfig))
 	response, err := dr.Execute()
 	Response := SetMinerConfResponse{}
 	if err != nil {

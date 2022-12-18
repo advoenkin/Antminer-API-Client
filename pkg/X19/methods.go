@@ -190,7 +190,7 @@ func (c *Device) GetPools() (Pools, error) {
 
 // GetHistoryLog получить текущий лог
 func (c *Device) GetHistoryLog() (string, error) {
-	c.Target.Path = CgiPath + HlogUrl
+	c.Target.Path = CgiPath + HistoryLogUrl
 	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), "")
 	response, err := dr.Execute()
 	ResponseHistoryLog := Logs{}.HistoryLog
@@ -206,7 +206,7 @@ func (c *Device) GetHistoryLog() (string, error) {
 
 // GetCurrentLog получить исторический лог
 func (c *Device) GetCurrentLog() (string, error) {
-	c.Target.Path = CgiPath + HlogUrl
+	c.Target.Path = CgiPath + CurrentLogUrl
 	dr := dac.NewRequest(c.User, c.Pass, "GET", c.Target.String(), "")
 	response, err := dr.Execute()
 	ResponseLog := Logs{}.CurrentLog

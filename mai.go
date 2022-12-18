@@ -7,6 +7,8 @@ import (
 
 func main() {
 	bb := X19.NewDevice()
-	bb.Ip.Host = "10.29.4.5"
-	fmt.Println(bb.Reboot())
+	bb.Target.Host = "10.29.4.5"
+	stats, err := bb.GetSystemInfo()
+	fmt.Printf("%+v", stats)
+	fmt.Println(err)
 }

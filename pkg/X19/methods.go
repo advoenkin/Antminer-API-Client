@@ -220,7 +220,7 @@ func (c *Device) GetCurrentLog() (string, error) {
 	return ResponseLog, err
 }
 
-// ChangeFanSetting Метод для изменения оборотов вентилятора.
+// ChangeFanSetting Мизменить режим работы вентиляторов
 func (c *Device) ChangeFanSetting(forceMode string, fanPwm string) (SetMinerConfResponse, error) {
 	NewConfig, _ := json.Marshal(SetMinerConf{BitmainFanCtrl: forceMode, BitmainFanPwm: fanPwm})
 	c.Target.Path = CgiPath + SetMinerConfUrl
@@ -237,8 +237,7 @@ func (c *Device) ChangeFanSetting(forceMode string, fanPwm string) (SetMinerConf
 	return Response, err
 }
 
-// SetWorkMode переключить режим работы майнера
-// mode: Принимает значения true/false в качестве string
+// SetWorkMode переключить режим работы
 func (c *Device) SetWorkMode(mode string) (SetMinerConfResponse, error) {
 	NewConfig, _ := json.Marshal(SetMinerConf{MinerMode: mode})
 	c.Target.Path = CgiPath + SetMinerConfUrl
@@ -253,4 +252,8 @@ func (c *Device) SetWorkMode(mode string) (SetMinerConfResponse, error) {
 		_ = json.Unmarshal(bytes, &Response)
 	}
 	return Response, err
+}
+
+func (c *Device) CalculateNominal() {
+	// Пока что эта функция ничего не делает, но в будущем она будет расчитывать номинал.
 }

@@ -9,7 +9,7 @@ const (
 	SummaryUrl      string = "summary.cgi"
 	StatsUrl        string = "stats.cgi"
 	HistoryLogUrl   string = "hlog.cgi"
-	CurrentLogUrl   string = "lo.cgi"
+	CurrentLogUrl   string = "log.cgi"
 	BlinkStatusUrl  string = "get_blink_status.cgi"
 	BlinkUrl        string = "blink.cgi"
 	RebootUrl       string = "reboot.cgi"

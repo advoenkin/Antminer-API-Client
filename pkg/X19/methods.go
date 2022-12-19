@@ -220,7 +220,7 @@ func (c *Device) GetCurrentLog() (string, error) {
 	return ResponseLog, err
 }
 
-// ChangeFanSetting Мизменить режим работы вентиляторов
+// ChangeFanSetting change fan settings. If ForceMode setting up true, this mean and mode. FanPwm is range 0..100 of percentage using fan speed.
 func (c *Device) ChangeFanSetting(forceMode string, fanPwm string) (SetMinerConfResponse, error) {
 	NewConfig, _ := json.Marshal(SetMinerConf{BitmainFanCtrl: forceMode, BitmainFanPwm: fanPwm})
 	c.Target.Path = CgiPath + SetMinerConfUrl
@@ -237,7 +237,7 @@ func (c *Device) ChangeFanSetting(forceMode string, fanPwm string) (SetMinerConf
 	return Response, err
 }
 
-// SetWorkMode переключить режим работы
+// SetWorkMode change workmode state. 1 - sleep, 0 - normal.
 func (c *Device) SetWorkMode(mode string) (SetMinerConfResponse, error) {
 	NewConfig, _ := json.Marshal(SetMinerConf{MinerMode: mode})
 	c.Target.Path = CgiPath + SetMinerConfUrl

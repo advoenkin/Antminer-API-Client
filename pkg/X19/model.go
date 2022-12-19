@@ -5,19 +5,32 @@ import (
 )
 
 const (
-	CgiPath         string = "/cgi-bin/"
-	SummaryUrl      string = "summary.cgi"
-	StatsUrl        string = "stats.cgi"
-	HistoryLogUrl   string = "hlog.cgi"
-	CurrentLogUrl   string = "log.cgi"
-	BlinkStatusUrl  string = "get_blink_status.cgi"
-	BlinkUrl        string = "blink.cgi"
-	RebootUrl       string = "reboot.cgi"
-	MinerConfUrl    string = "get_miner_conf.cgi"
-	SystemInfoUrl   string = "get_system_info.cgi"
-	NetworkInfoUrl  string = "get_network_info.cgi"
-	ChartUrl        string = "chart.cgi"
-	PoolsUrl        string = "pools.cgi"
+	// CgiPath default url path to make requests.
+	CgiPath string = "/cgi-bin/"
+	// SummaryUrl endpoint to get summary information
+	SummaryUrl string = "summary.cgi"
+	// StatsUrl endpoint to get stats information
+	StatsUrl string = "stats.cgi"
+	// HistoryLogUrl endpoint to get historical log of the device
+	HistoryLogUrl string = "hlog.cgi"
+	// CurrentLogUrl endpoint to get current log of the device
+	CurrentLogUrl string = "log.cgi"
+	// BlinkStatusUrl endpoint to get status of led blinking
+	BlinkStatusUrl string = "get_blink_status.cgi"
+	// BlinkUrl  endpoint to enable or disabled led blinking
+	BlinkUrl string = "blink.cgi"
+	// RebootUrl endpoint to make device reboot
+	RebootUrl string = "reboot.cgi"
+	// MinerConfUrl endpoint to get current device config
+	MinerConfUrl string = "get_miner_conf.cgi"
+	// SystemInfoUrl endpoint to get current system information
+	SystemInfoUrl string = "get_system_info.cgi"
+	// NetworkInfoUrl endpoint to get current network information
+	NetworkInfoUrl string = "get_network_info.cgi"
+	ChartUrl       string = "chart.cgi"
+	// PoolsUrl endpoint to get information about pools
+	PoolsUrl string = "pools.cgi"
+	// SetMinerConfUrl endpoint to set specific configuration of the device
 	SetMinerConfUrl string = "set_miner_conf.cgi"
 )
 
